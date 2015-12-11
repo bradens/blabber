@@ -12,7 +12,8 @@ defmodule Blabber do
       # Start the Ecto repository
       worker(Blabber.Repo, []),
       # Here you could define other workers and supervisors as children
-      # worker(Blabber.Worker, [arg1, arg2, arg3]),
+      worker(Blabber.ChatServer, []),
+      worker(Blabber.MessageServer, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

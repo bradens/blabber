@@ -1,5 +1,6 @@
 defmodule Blabber.UserSocket do
   use Phoenix.Socket
+  require Logger
 
   ## Channels
   channel "rooms:*", Blabber.RoomChannel
@@ -20,6 +21,9 @@ defmodule Blabber.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(_params, socket) do
+    Logger.debug"> params are #{inspect _params}"
+    socket = assign(socket, :user_id, _params["user_id"])
+    socket = assign(socket, :username, _params["username"] || "anonymous")
     {:ok, socket}
   end
 
